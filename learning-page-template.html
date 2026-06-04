@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Page Template</title>
+<style>
+
+/* #region ⬜ PAGE SHELL */
+/* ── PAGE SHELL ── */
+* { box-sizing: border-box; }
+
+body {
+  font-family: Segoe UI, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #1f1f1f;
+}
+
+/* ── BANDED SECTIONS ── */
+.section-band {
+  width: 100%;
+  padding: 50px 20px;
+}
+
+.section-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.band-cream  { background: #fdf6d6; }
+.band-white  { background: #ffffff; }
+.band-light  { background: #f5f6f7; }
+.band-subtle { background: #eef0f5; }
+
+/* ── SECTION LABELS ── */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 16px;
+}
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #242424;
+  margin-bottom: 20px;
+}
+
+
+/* ── PAGE HEADER ── */
+.page-header h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+}
+
+.page-header p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* #endregion ⬜ PAGE SHELL */
+/* #region 🔵 VIDEO */
+/* ── VIDEO ── */
+.video-wrap {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  overflow: hidden;
+  background: #000;
+}
+
+.video-wrap iframe {
+  border: none;
+  display: block;
+}
+/* #endregion 🔵 VIDEO */
+/* #region 🟠 IMAGE / LIGHTBOX */
+/* ── IMAGE SECTION ── */
+.img-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+
+.img-wrap .zoomable-img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.img-wrap .zoomable-img:hover {
+  transform: scale(1.01);
+}
+
+/* Lightbox overlay */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  z-index: 10000;
+}
+/* ── TABS ── */
+
+.tabs-scope {
+    font-family: Segoe UI, sans-serif;
+    display: flex;
+    justify-content: center;
+  }
+
+.tabs-scope .wrapper {
+    max-width: 720px;
+    width: 100%;
+    margin: 40px auto;
+    text-align: center;
+  }
+
+.tabs-scope h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  /* Tabs row */
+.tabs-scope .tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Pill tabs */
+.tabs-scope .tab {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: black;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  /* Hover = dark blue */
+.tabs-scope .tab:hover {
+    background: #1d4ed8;
+    color: white;
+    border-color: #1d4ed8;
+  }
+
+  /* Selected = dark gray */
+.tabs-scope .tab.active {
+    background: #4b5563;
+    color: white;
+    border-color: #4b5563;
+  }
+
+.tabs-scope .tab.active:hover {
+    background: #4b5563;
+  }
+
+  /* ✅ CONTENT BOX (only bordered element now) */
+.tabs-scope .content-box {
+    text-align: left;
+    padding: 25px;
+    background: white;
+
+    /* Border styling */
+    border: 1px solid #c9d1d9;
+    border-left: 6px solid #357DE8;
+    border-radius: 8px;
+
+    line-height: 1.6;
+  }
+
+.tabs-scope .tab-content {
+    display: none;
+  }
+
+.tabs-scope .tab-content.active {
+    display: block;
+  }
+
+.tabs-scope p {
+    margin-top: 0;
+  }
+
+.tabs-scope { background: transparent; }
+.tabs-scope .content-box { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+
+
+/* #endregion 🟢 TABS */
+/* #region 🟡 HOTSPOT */
+/* ── HOTSPOT ── */
+
+/* ✅ BASE */
+.hotspot-scope {
+  font-family: Segoe UI, sans-serif;
+  background: #f5f6f7;
+  margin: 0;
+}
+
+.hotspot-scope .page-wrap {
+  padding: 30px 20px;
+}
+
+.hotspot-scope .container {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+
+/* ✅ IMAGE */
+.hotspot-scope .image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.hotspot-scope .image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* ✅ HOTSPOTS (clean + modern) */
+.hotspot-scope .hotspot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #357DE8;  /* accessible blue */
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 3px solid #FFFFFF;
+  font-size: 22px;
+
+  /* subtle elevation */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* ✅ TOOLTIP CARD (major upgrade) */
+.hotspot-scope .tooltip {
+  position: absolute;
+  background: #FFFFFF;
+  border: 1px solid #357DE8;  /* strong accessible border */
+  border-left: 6px solid #357DE8; /* visual anchor */
+  padding: 16px;
+  border-radius: 8px;
+  display: none;
+  max-width: 300px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+/* ✅ TOOLTIP TITLE */
+.hotspot-scope .tooltip strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #242424;
+  margin-bottom: 6px;
+}
+
+/* ✅ TOOLTIP TEXT */
+.hotspot-scope .tooltip {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ✅ OPTIONAL HIGHLIGHT STYLE (for learning sections) */
+.hotspot-scope .highlight-box {
+  background: #FFF5D4;
+  border-left: 6px solid #FFD400;
+  padding: 15px;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+/* ✅ EMPHASIS TEXT (like your yellow highlight) */
+.hotspot-scope .highlight-inline {
+  background: #FFD400;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.hotspot-scope { background: transparent; }
+
+
+/* ── FLIP CARD ── */
+
+
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+.flip-scope {
+  font-family: Segoe UI, sans-serif;
+  background: #f5f6f7;
+  margin: 0;
+  padding: 40px 20px;
+}
+
+/* ✅ Page structure */
+.flip-scope main.page-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Text */
+.flip-scope h1 {
+  font-size: 34px;
+  margin: 0 0 16px 0;
+}
+
+.flip-scope p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.flip-scope .instruction {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #333;
+}
+
+/* ✅ Center card */
+.flip-scope .card-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+/* ✅ Portrait card */
+.flip-scope .flip-card {
+  width: 300px;
+  height: 360px;
+  perspective: 1200px;
+}
+
+/* Inner */
+.flip-scope .flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  cursor: pointer;
+}
+
+/* ✅ Reduce motion (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+.flip-scope .flip-inner {
+    transition: none;
+  }
+}
+
+.flip-scope .flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front / Back */
+.flip-front,
+.flip-scope .flip-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  border: 1px solid #d8dde3;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.10);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Front */
+.flip-scope .flip-front {
+  background: #eceff3;
+  color: #000;
+}
+
+.flip-scope .flip-front .title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Back */
+.flip-scope .flip-back {
+  background: #3b6edc;
+  color: #fff;
+  transform: rotateY(180deg);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ✅ Front flip icon only */
+.flip-scope .flip-front .flip-icon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* Tooltip ONLY on icon hover/focus */
+.flip-front .flip-icon:hover .tooltip,
+.flip-scope .flip-front .flip-icon:focus .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tooltip */
+.flip-scope .tooltip {
+  position: absolute;
+  bottom: 35px;
+  right: 0;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+/* Tooltip arrow */
+.flip-scope .tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  right: 10px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+}
+
+/* ✅ Back hint */
+.flip-scope .flip-back .flip-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+
+.flip-scope { background: transparent; }
+
+
+/* #endregion 🟣 FLIP CARD */
+/* #region 🔴 ACCORDION */
+/* ── ACCORDION ── */
+
+:root {
+    --border: #d3d3d3;
+    --panel-bg: #f3f3f3;
+    --text: #1f1f1f;
+    --accent: #6b6cf6;
+    --focus: #005fcc;
+  }
+
+.accordion-scope {
+    font-family: Segoe UI, sans-serif;
+    margin: 40px 20px;
+    background: #ffffff;
+    color: var(--text);
+  }
+
+.accordion-scope .accordion {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ✅ Each item gets a separator line */
+.accordion-scope .accordion-item {
+    border-top: 1px solid var(--border);
+  }
+
+.accordion-scope .accordion-item:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ✅ ACTIVE STATE (matches screenshot) */
+.accordion-scope .accordion-item.active {
+    background: var(--panel-bg);
+    border-left: 5px solid var(--accent);
+  }
+
+.accordion-scope .accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 16px;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+  }
+
+.accordion-scope .accordion-trigger:hover {
+    background-color: #f7f7f7;
+  }
+
+  /* Prevent hover from overriding active background */
+.accordion-scope .accordion-item.active .accordion-trigger:hover {
+    background-color: transparent;
+  }
+
+.accordion-scope .accordion-trigger:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+.accordion-scope .accordion-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+.accordion-scope .accordion-trigger[aria-expanded="true"] .accordion-icon {
+    transform: rotate(90deg);
+  }
+
+.accordion-scope .accordion-panel {
+    padding: 0 20px 20px 20px;
+  }
+
+.accordion-scope .accordion-panel-inner {
+    padding-left: 26px; /* aligns under text, not icon */
+  }
+
+.accordion-scope .accordion-panel p {
+    margin: 0 0 12px 0;
+    max-width: 65ch;
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+.accordion-scope .accordion-icon {
+      transition: none;
+    }
+  }
+
+
+.accordion-scope .accordion-trigger { color: #1f1f1f; }
+.accordion-scope [hidden] { display: none !important; }
+.accordion-scope { background: transparent; }
+
+
+/* #endregion 🔴 ACCORDION */
+/* #region 🩷 KNOWLEDGE CHECK */
+/* ── KNOWLEDGE CHECK ── */
+
+.quiz-scope {
+    font-family: Segoe UI, sans-serif;
+    background: #f5f6f7;
+    padding: 20px;
+    margin: 0;
+}
+.quiz-scope .container {
+    max-width: 700px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.quiz-scope .progress-bar {
+    height: 6px;
+    background: #dae2f1;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+.quiz-scope .progress-fill {
+    height: 100%;
+    background: #4f7c2f;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+.question { display: none; }
+.question.active { display: block; }
+.quiz-scope .option {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.option:hover { background: #f3f4f6; }
+.option input { margin-right: 10px; }
+.option.selected { background: #dbeafe; }
+.quiz-scope .feedback {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    border-left: 6px solid;
+}
+.correct { border-left-color: #4f7c2f; }
+.incorrect { border-left-color: #fa698a; }
+.submit-btn,
+.try-btn,
+.quiz-scope .next-btn {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-size: 16px;
+}
+.quiz-scope .submit-btn {
+    background: #cbd5e1;
+    cursor: not-allowed;
+}
+.quiz-scope .submit-btn.active {
+    background: #2563eb;
+    cursor: pointer;
+}
+.quiz-scope .try-btn {
+    background: #f59e0b;
+    cursor: pointer;
+    display: none;
+}
+.quiz-scope .next-btn {
+    background: #4f7c2f;
+    cursor: pointer;
+    display: none;
+}
+.quiz-scope .scorm-status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #6b7280;
+}
+.quiz-scope #completion {
+    display:none;
+    margin-top:30px;
+}
+.quiz-scope .completion-card {
+    border: 1px solid #ddd;
+    border-left: 6px solid #4f7c2f;
+    border-radius: 6px;
+    padding: 18px;
+    background: #f1f6f2;
+}
+.quiz-scope .small-note {
+    font-size: 14px;
+    color: #4b5563;
+    margin-top: 12px;
+}
+
+.quiz-scope .feedback.correct   { border-left-color: #4f7c2f !important; }
+.quiz-scope .feedback.incorrect { border-left-color: #fa698a !important; }
+.quiz-scope .scorm-status { display: none !important; }
+.quiz-scope { background: transparent; }
+.quiz-scope .container { background: #ffffff; box-shadow: 0 2px 12px rgba(0,0,0,0.08) !important; }
+
+
+/* #endregion 🩷 KNOWLEDGE CHECK */
+</style>
+</head>
+<body>
+
+  <!-- #region ⬜ HEADER -->
+<!-- ✅ HEADER BAND -->
+  <div class="section-band band-cream">
+    <div class="section-inner">
+      <div class="page-header">
+        <h1>Learning Page Template</h1><br>
+        <hr><br>
+        <p>By the end of this lesson, you'll be able to:</p>
+        <ul>
+          <li>Learning objective 1</li> 
+          <li>Learning objective 2</li>
+          <li>Learning objective 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- #endregion ⬜ HEADER -->
+<!-- #region 🟢 TABS -->
+<!-- ✅ 2. TABS BAND -->
+  <div class="section-band band-white">
+    <div class="section-inner">
+      <div class="section-label">Explore Scenarios</div>
+      <div class="tabs-scope">
+        <div class="wrapper">
+
+  <h2>Explore Examples</h2>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab(1, this)">Example 1</div>
+    <div class="tab" onclick="showTab(2, this)">Example 2</div>
+    <div class="tab" onclick="showTab(3, this)">Example 3</div>
+    <div class="tab" onclick="showTab(4, this)">Example 4</div>
+  </div>
+
+  <div class="content-box">
+    
+    <div id="tab1" class="tab-content active">
+      <p><strong>Worse:</strong> How do I add numbers in Excel?</p>
+      <p><strong>Better:</strong> How do I add up a row of lab results in Excel? I want to do this automatically for a whole sheet of rows, with all the totals ending up on the right in a column called "Total Results."</p>
+    </div>
+
+    <div id="tab2" class="tab-content">
+      <p><strong>Scenario:</strong> Email service is down.</p>
+      <p><strong>JSM Tip:</strong> Log as an <strong>Incident</strong> since service was previously working.</p>
+    </div>
+
+    <div id="tab3" class="tab-content">
+      <p><strong>Scenario:</strong> A user needs software installed.</p>
+      <p><strong>JSM Tip:</strong> Log as a <strong>Service Request</strong> (standard fulfillment).</p>
+    </div>
+
+    <div id="tab4" class="tab-content">
+      <p><strong>Scenario:</strong> A user needs assistance with a software issue.</p>
+      <p><strong>JSM Tip:</strong> Log as a <strong>Service Request</strong> (standard fulfillment).</p>
+    </div>
+
+  </div>
+
+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #endregion 🟢 TABS -->
+<!-- #region 🟡 HOTSPOT -->
+<!-- ✅ 3. HOTSPOT BAND -->
+  <div class="section-band band-light">
+    <div class="section-inner">
+      <div class="section-label">Interface Walkthrough</div>
+      <div class="hotspot-scope">
+        <div class="page-wrap">
+
+  <div class="container">
+
+    <h2 class="section-title">JSM Interface Walkthrough</h2>
+
+    <div class="image-wrapper">
+
+      <!-- ✅ LOCAL IMAGE -->
+      <img src="images/jsm-screen.png" alt="JSM Screen">
+
+      
+<!-- ✅ HOTSPOT 1 -->
+<div class="hotspot" style="top: 25%; left: 25%;" onclick="toggleTip(event,'t1')">1</div>
+
+<div id="t1" class="tooltip" style="top: 34%; left: 25%;">
+  <strong>Summary</strong>
+  <ul>
+    <li>Enter a clear, short description of the issue</li>
+    <li>Then you want to do a bunch of other things</li>
+    <li>Then do more things</li>
+  </ul>
+</div>
+
+
+      <!-- ✅ HOTSPOT 2 -->
+      <div class="hotspot" style="top: 55%; left: 60%;" onclick="toggleTip(event,'t2')">2</div>
+      <div id="t2" class="tooltip" style="top: 64%; left: 60%;">
+        <strong>Priority</strong>
+        Determines urgency and impact.
+      </div>
+
+      <!-- ✅ HOTSPOT 3 -->
+      <div class="hotspot" style="top: 70%; left: 8%;" onclick="toggleTip(event,'t3')">3</div>
+      <div id="t3" class="tooltip" style="top: 79%; left: 10%;">
+        <strong>Priority</strong>
+        Determines urgency and impact.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+      </div>
+    </div>
+  </div>
+<!-- ✅ VIDEO BAND  -->
+
+<div class="section-band band-white">
+  <div class="section-inner">
+    <div class="section-label">Watch & Learn</div>
+
+    <h2 class="section-title">
+      Watch the video below.
+    </h2>
+
+
+    <div style="max-width: 760px; margin: 0 auto;">
+      <div class="video-wrap">
+        <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+          <iframe
+            src="https://dal.hosted.panopto.com/Panopto/Pages/Embed.aspx?id=95cc8281-c580-4de3-a62d-b18d00b4d523&autoplay=false&offerviewer=true&showtitle=true&showbrand=true&captions=true&interactivity=all"
+            style="border: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; box-sizing: border-box; border-radius: 10px;"
+            allowfullscreen
+            allow="autoplay"
+            aria-label="Panopto Embedded Video Player"
+            aria-description="Intro to Prospect Management">
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+    <div style="clear: both; padding-top: 1px;"></div>
+
+  </div>
+</div>
+<!-- #endregion 🔵 VIDEO -->
+<!-- #region 🟠 IMAGE / LIGHTBOX -->
+<!-- ✅ IMAGE BAND -->
+<div class="section-band band-light">
+  <div class="section-inner">
+
+    <div class="section-label">Figure</div>
+
+    <div class="img-scope">
+
+      <h2 class="section-title">Example Image Title</h2>
+
+      <p class="section-intro">
+        Click the image to enlarge.
+      </p>
+
+      <div class="img-wrap">
+        <img
+          src="images/user-help.jpg"
+          alt="[ALT TEXT: Two people climbing a mountain and one is outreaching their hand to help their climbing partner]"
+          class="zoomable-img"
+          onclick="openLightbox(this)"
+          title="Click to enlarge"
+        />
+      </div>
+
+      <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+      </div>
+
+    </div>
+
+  </div>
+</div>
+  <!-- #endregion 🟠 IMAGE / LIGHTBOX -->
+<!-- #region 🟣 FLIP CARD -->
+<!-- ✅ 5. FLIP CARD BAND -->
+  <div class="section-band band-light">
+    <div class="section-inner">
+      <div class="section-label">Key Concept</div>
+      <div class="flip-scope">
+        <main class="page-wrap">
+
+  <!-- ✅ Text Content -->
+  <h1>What is a Concept?</h1>
+
+  <p>
+    This section introduces a key concept that will support your understanding of the topic. A concept may represent an idea, process, or principle used within a system or framework.
+  </p>
+
+  <p>
+    A concept typically includes defined elements, relationships, and characteristics that help explain how something works or how it should be applied in practice.
+  </p>
+
+  <!-- ✅ Updated accessible instruction -->
+  <div class="instruction">
+    Select the card (click or press Enter or Space) to review a summary of the key concept.
+  </div>
+
+  <!-- ✅ Centered Card -->
+  <div class="card-center">
+
+    <div class="flip-card">
+      <div class="flip-inner"
+           tabindex="0"
+           role="button"
+           aria-label="Flip card to view a summary of the organization concept"
+           onclick="flipCard(this)"
+           onkeydown="handleKey(event, this)">
+
+        <!-- Front -->
+        <div class="flip-front">
+
+          <div class="title">Concept</div>
+
+          <!-- ✅ Icon hidden from screen readers -->
+          <div class="flip-icon" tabindex="0" aria-hidden="true">
+            ↺
+            <div class="tooltip">Flip card for summary</div>
+          </div>
+
+        </div>
+
+        <!-- Back -->
+        <div class="flip-back">
+
+         A defined idea or structure that brings together key elements and relationships to support understanding and application.
+
+          <div class="flip-hint" aria-hidden="true">
+            ↺
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</main>
+      </div>
+    </div>
+  </div>
+
+  <!-- #endregion 🟣 FLIP CARD -->
+<!-- #region 🔴 ACCORDION -->
+<!-- ✅ 6. ACCORDION BAND -->
+  <div class="section-band band-light">
+    <div class="section-inner">
+      <div class="section-label">More Details</div>
+      <div class="accordion-scope">
+        <div class="accordion">
+
+  <!-- Item 1 -->
+  <div class="accordion-item">
+    <button
+      id="accordion-trigger-1"
+      class="accordion-trigger"
+      type="button"
+      aria-expanded="false"
+      aria-controls="accordion-panel-1"
+    >
+      <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span>Work item key</span>
+    </button>
+
+    <div
+      id="accordion-panel-1"
+      class="accordion-panel"
+      role="region"
+      aria-labelledby="accordion-trigger-1"
+      hidden
+    >
+      <div class="accordion-panel-inner">
+        <p>
+          The <strong>work item key</strong> (key) is a unique identifier automatically
+          given to each work item. here is a bunch of text.
+          some more text
+          and more text
+          and more text
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="accordion-item">
+    <button
+      id="accordion-trigger-2"
+      class="accordion-trigger"
+      type="button"
+      aria-expanded="false"
+      aria-controls="accordion-panel-2"
+    >
+      <svg class="accordion-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span>Summary</span>
+    </button>
+
+    <div
+      id="accordion-panel-2"
+      class="accordion-panel"
+      role="region"
+      aria-labelledby="accordion-trigger-2"
+      hidden
+    >
+      <div class="accordion-panel-inner">
+        <p>Summary content here.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #endregion 🔴 ACCORDION -->
+<!-- #region 🩷 KNOWLEDGE CHECK -->
+<!-- ✅ 7. KNOWLEDGE CHECK BAND -->
+  <div class="section-band band-white">
+    <div class="section-inner">
+      <div class="section-label">Knowledge Check</div>
+      <div class="quiz-scope">
+        <div class="container">
+    <h2>Let's see what you've learned!</h2>
+    <div>Question <span id="qNum">1</span> of 2</div>
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- QUESTION 1 -->
+    <div class="question active" id="q1" data-question-id="q1">
+        <p><strong>Email service is down for multiple users across campus.</strong></p>
+        <p>Select the correct classification:</p>
+
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q1" value="incorrect" onchange="selectAnswer(this)">
+                📝 Service Request
+            </label>
+            <label class="option">
+                <input type="radio" name="q1" value="correct" onchange="selectAnswer(this)">
+                🚨 Incident
+            </label>
+            <label class="option">
+                <input type="radio" name="q1" value="incorrect" onchange="selectAnswer(this)">
+                🔍 Problem
+            </label>
+        </div>
+
+        <div class="feedback correct">
+            ✅ <strong>That's correct.</strong><br><br>
+            This is an <strong>Incident</strong> because there is an active service disruption.
+        </div>
+        <div class="feedback incorrect">
+            ❌ <strong>Not quite.</strong><br><br>
+            This is a service outage → that makes it an <strong>Incident</strong>.<br><br>
+            Try again.
+        </div>
+
+        <button class="submit-btn" onclick="submitAnswer(this)" disabled>Submit</button>
+        <button class="try-btn" onclick="retryQuestion(this)">Try Again</button>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="question" id="q2" data-question-id="q2">
+        <p><strong>Scenario:</strong> A staff member needs a new software install.</p>
+        <p>Select the correct classification:</p>
+
+        <div class="options">
+            <label class="option">
+                <input type="radio" name="q2" value="incorrect" onchange="selectAnswer(this)">
+                🚨 Incident
+            </label>
+            <label class="option">
+                <input type="radio" name="q2" value="correct" onchange="selectAnswer(this)">
+                📝 Service Request
+            </label>
+            <label class="option">
+                <input type="radio" name="q2" value="incorrect" onchange="selectAnswer(this)">
+                🔍 Problem
+            </label>
+        </div>
+
+        <div class="feedback correct">
+            ✅ <strong>That's correct.</strong><br><br>
+            This is a <strong>Service Request</strong>.
+        </div>
+        <div class="feedback incorrect">
+            ❌ <strong>Not quite.</strong><br><br>
+            There's no disruption here — not an Incident.<br><br>
+            Try again.
+        </div>
+
+        <button class="submit-btn" onclick="submitAnswer(this)" disabled>Submit</button>
+        <button class="try-btn" onclick="retryQuestion(this)">Try Again</button>
+        <button class="next-btn" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <!-- COMPLETION -->
+    
+
+    
+
+    <div id="completion" style="display:none; margin-top:20px; text-align:center; padding:10px 0;">
+      <p><strong>🎉 Quiz complete!</strong></p>
+      <p style="color:#555;">Great work — you correctly identified each scenario.</p>
+    </div>
+</div>
+      </div>
+    </div>
+  </div>
+
+<!-- #endregion 🩷 KNOWLEDGE CHECK -->
+<!-- ═══ MERGED SCRIPTS ═══ -->
+<script>
+
+/* ── TABS ── */
+
+function showTab(tabNumber, element) {
+  var contents = document.querySelectorAll(".tab-content");
+  contents.forEach(c => c.classList.remove("active"));
+
+  var tabs = document.querySelectorAll(".tab");
+  tabs.forEach(t => t.classList.remove("active"));
+
+  document.getElementById("tab" + tabNumber).classList.add("active");
+  element.classList.add("active");
+}
+
+
+/* ── FLIP CARD ── */
+
+function flipCard(card) {
+  card.classList.toggle("flipped");
+}
+
+function handleKey(event, card) {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    flipCard(card);
+  }
+}
+
+// #endregion 🟣 FLIP CARD
+// #region 🟠 IMAGE / LIGHTBOX
+/* ── IMAGE LIGHTBOX ── */
+function openLightbox(img) {
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lightboxImg');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lb.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+// #endregion 🟠 IMAGE / LIGHTBOX
+// #region 🟡 HOTSPOT
+/* ── HOTSPOT (scoped outside-click) ── */
+
+function toggleTip(event, id) {
+
+  event.stopPropagation();
+
+  const container = event.target.closest(".image-wrapper");
+
+  const tips = container.querySelectorAll(".tooltip");
+  const current = container.querySelector("#" + id);
+
+  const isOpen = current.style.display === "block";
+
+  tips.forEach(t => t.style.display = "none");
+
+  if (!isOpen) {
+    current.style.display = "block";
+  }
+}
+
+/* ✅ CLOSE ALL ON OUTSIDE CLICK */
+document.addEventListener("click", function() {
+  document.querySelectorAll(".hotspot-scope .tooltip").forEach(t => t.style.display = "none");
+});
+
+
+// #endregion 🟡 HOTSPOT
+// #region 🩷 KNOWLEDGE CHECK
+/* ── QUIZ (no SCORM) ── */
+let current = 1;
+const total = 2;
+const answerState = { q1: false, q2: false };
+let attempts = 0;
+
+function selectAnswer(input) {
+    const questionDiv = input.closest('.question');
+
+    questionDiv.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+    input.parentElement.classList.add('selected');
+
+    const submitBtn = questionDiv.querySelector('.submit-btn');
+    submitBtn.disabled = false;
+    submitBtn.classList.add('active');
+
+    questionDiv.querySelectorAll('.feedback').forEach(f => f.style.display = 'none');
+    questionDiv.querySelector('.try-btn').style.display = 'none';
+    questionDiv.querySelector('.next-btn').style.display = 'none';
+}
+
+function submitAnswer(btn) {
+    const questionDiv = btn.closest('.question');
+    const selected = questionDiv.querySelector('input:checked');
+    if (!selected) return;
+
+    attempts += 1;
+
+    const correctBox = questionDiv.querySelector('.feedback.correct');
+    const incorrectBox = questionDiv.querySelector('.feedback.incorrect');
+    const nextBtn = questionDiv.querySelector('.next-btn');
+    const tryBtn = questionDiv.querySelector('.try-btn');
+    const questionId = questionDiv.dataset.questionId;
+
+    questionDiv.querySelectorAll('input').forEach(i => i.disabled = true);
+
+    if (selected.value === 'correct') {
+        answerState[questionId] = true;
+        correctBox.style.display = 'block';
+        nextBtn.style.display = 'block';
+        btn.style.display = 'none';
+
+        const score = calculateScore();
+
+
+
+
+    } else {
+        answerState[questionId] = false;
+        incorrectBox.style.display = 'block';
+        btn.style.display = 'none';
+        tryBtn.style.display = 'block';
+
+
+
+    }
+}
+
+function retryQuestion(btn) {
+    const questionDiv = btn.closest('.question');
+    const container = questionDiv.querySelector('.options');
+    const options = Array.from(container.children);
+
+    for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        container.appendChild(options[j]);
+    }
+
+    questionDiv.querySelectorAll('input').forEach(i => {
+        i.checked = false;
+        i.disabled = false;
+    });
+
+    questionDiv.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+    questionDiv.querySelectorAll('.feedback').forEach(f => f.style.display = 'none');
+
+    const submitBtn = questionDiv.querySelector('.submit-btn');
+    submitBtn.style.display = 'block';
+    submitBtn.disabled = true;
+    submitBtn.classList.remove('active');
+
+    btn.style.display = 'none';
+}
+
+function calculateScore() {
+    const correctCount = Object.values(answerState).filter(Boolean).length;
+    return Math.round((correctCount / total) * 100);
+}
+
+function nextQuestion() {
+    const active = document.getElementById('q' + current);
+    active.classList.remove('active');
+    current++;
+
+    if (current <= total) {
+        document.getElementById('q' + current).classList.add('active');
+        document.getElementById('qNum').textContent = current;
+        document.getElementById('progressFill').style.width = ((current - 1) / total) * 100 + '%';
+    } else {
+        document.getElementById('progressFill').style.width = '100%';
+        document.getElementById('completion').style.display = 'block';
+        document.getElementById('qNum').parentElement.style.display = 'none';
+        completeCourse();
+    }
+}
+
+// #endregion 🩷 KNOWLEDGE CHECK
+function completeCourse() { /* No SCORM — completion handled by UI */ }
+// #region 🔴 ACCORDION
+/* ── ACCORDION (scoped + DOMContentLoaded) ── */
+document.addEventListener('DOMContentLoaded', function() {
+
+  var scope = document.querySelector('.accordion-scope');
+  if (!scope) return;
+  const triggers = scope.querySelectorAll('.accordion-trigger');
+
+  triggers.forEach(trigger => {
+    const panel = document.getElementById(trigger.getAttribute('aria-controls'));
+    const item = trigger.closest('.accordion-item');
+
+    trigger.addEventListener('click', () => {
+
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+      // Close all
+      triggers.forEach(other => {
+        const otherPanel = document.getElementById(other.getAttribute('aria-controls'));
+        const otherItem = other.closest('.accordion-item');
+
+        other.setAttribute('aria-expanded', 'false');
+        otherPanel.hidden = true;
+        otherItem.classList.remove('active');
+      });
+
+      // Open selected (if previously closed)
+      if (!isExpanded) {
+        trigger.setAttribute('aria-expanded', 'true');
+        panel.hidden = false;
+        item.classList.add('active');
+      }
+    });
+  });
+
+});
+
+// #endregion 🔴 ACCORDION
+</script>
+</body>
+</html>
